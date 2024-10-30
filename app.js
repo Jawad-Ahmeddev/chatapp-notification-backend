@@ -11,13 +11,13 @@ const messageRoute = require('./routes/messageRoute');
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: process.env.frontendUrl, // Replace with your Angular app URL
+        origin: 'https://chatapp-notofication-frontend-dlp73461a.vercel.app', // Replace with your Angular app URL
         methods: ['GET', 'POST'],
         credentials: true
     }
 });
 app.use(cors({
-    origin: process.env.frontendUrl, // Replace with your Angular app's URL
+    origin: 'https://chatapp-notofication-frontend-dlp73461a.vercel.app', // Replace with your Angular app's URL
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Allow cookies to be sent with requests
 }));
