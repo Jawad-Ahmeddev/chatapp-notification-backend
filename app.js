@@ -32,7 +32,7 @@ app.use('/api/messages', messageRoute);
 
 require('./socket/chatSocket')(io);
 
-const connectDb = require('../config/db')
+const connectDb = require('./config/db')
 connectDb();
 const port = process.env.PORT || 3001;
 
