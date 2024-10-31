@@ -1,10 +1,11 @@
+const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const dotenv = require('dotenv');
-dotenv.config({ path: './config.env' });
+
 const app = express();
 const messageRoute = require('./routes/messageRoute');
 
