@@ -10,17 +10,28 @@ const app = express();
 const messageRoute = require('./routes/messageRoute');
 
 const server = http.createServer(app);
+const allowedOrigins = [
+    'https://chatapp-notofication-frontend.vercel.app',
+    'https://chatapp-notofication-frontend.vercel.app/login'
+];
+
 const io = socketIo(server, {
     cors: {
-        origin: 'https://chatapp-notofication-frontend.vercel.app', // Replace with your Angular app URL
+        origin: allowedOrigins, // Replace with your Angular app URL
         methods: ['GET', 'POST'],
         credentials: true
     }
 });
 app.use(cors({
-    origin: 'https://chatapp-notofication-frontend.vercel.app', // Replace with your Angular app URL
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // Allow cookies to be sent with requests
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    credentials: true
 }));
 
 app.use(express.json());
